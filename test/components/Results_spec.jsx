@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {findDOMNode} from 'react-dom';
 import {List, Map} from 'immutable';
 import React from 'react/addons';
-import Results from '../../src/components/Results';
+import {Results} from '../../src/components/Results';
 
 const {renderIntoDocument, scryRenderedDOMComponentsWithClass, Simulate} = React.addons.TestUtils;
 
