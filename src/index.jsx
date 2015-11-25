@@ -11,15 +11,15 @@ import Router, {Route} from 'react-router';
 import {setState} from './action_creators';
 import {VotingContainer} from './components/Voting';
 
-const createStoreWithMiddleware = applyMiddleware(
-  remoteActionMiddleware
-)(createStore);
-const store = createStoreWithMiddleware(reducer);
-
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state =>
   store.dispatch(setState(state))
 );
+
+const createStoreWithMiddleware = applyMiddleware(
+  remoteActionMiddleware(socket)
+)(createStore);
+const store = createStoreWithMiddleware(reducer);
 
 const routes = <Route component={App}>
   <Route path='/results' component={ResultsContainer} />
