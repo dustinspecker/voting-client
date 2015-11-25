@@ -1,3 +1,4 @@
+import * as actionCreators from '../action_creators';
 import {connect} from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import React from 'react';
@@ -49,4 +50,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const ResultsContainer = connect(mapStateToProps)(Results);
+export const ResultsContainer = connect(mapStateToProps, actionCreators)(Results);
