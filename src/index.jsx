@@ -1,16 +1,20 @@
 import App from './components/App';
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import io from 'socket.io-client';
 import {Provider} from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reducer from './reducer';
+import remoteActionMiddleware from './remote_action_middleware';
 import {ResultsContainer} from './components/Results';
 import Router, {Route} from 'react-router';
 import {setState} from './action_creators';
 import {VotingContainer} from './components/Voting';
 
-const store = createStore(reducer);
+const createStoreWithMiddleware = applyMiddleware(
+  remoteActionMiddleware
+)(createStore);
+const store = createStoreWithMiddleware(reducer);
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state =>
